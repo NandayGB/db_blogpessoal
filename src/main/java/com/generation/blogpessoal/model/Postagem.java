@@ -40,6 +40,10 @@ public class Postagem {
 	public long getId() {
 		return id;
 	}
+	
+	public long getUsuario() {
+		return getUsuario();
+	}
 
 	public void setId(long id) {
 		this.id = id;

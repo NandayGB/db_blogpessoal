@@ -1,6 +1,5 @@
 package com.generation.blogpessoal.service;
 
-
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,28 +60,29 @@ public class UsuarioService {
 
 	public Optional<UsuarioLogin> autenticarUsuario(Optional<UsuarioLogin> usuarioLogin) {
         
-       
+
 		var credenciais = new UsernamePasswordAuthenticationToken(usuarioLogin.get().getUsuario(), usuarioLogin.get().getSenha());
 		
-       
+        
 		Authentication authentication = authenticationManager.authenticate(credenciais);
         
-    
+        
 		if (authentication.isAuthenticated()) {
 
-         
+           
 			Optional<Usuario> usuario = usuarioRepository.findByUsuario(usuarioLogin.get().getUsuario());
 
            
 			if (usuario.isPresent()) {
 
-           
-			   usuarioLogin.get().setId(usuario.get().getId());
+          
+			    usuarioLogin.get().setId(usuario.get().getId());
                 usuarioLogin.get().setNome(usuario.get().getNome());
                 usuarioLogin.get().setFoto(usuario.get().getFoto());
                 usuarioLogin.get().setToken(gerarToken(usuarioLogin.get().getUsuario()));
                 usuarioLogin.get().setSenha("");
-			
+				
+                
 			   return usuarioLogin;
 			
 			}
